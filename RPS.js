@@ -1,13 +1,11 @@
-// Step 1
-console.log("Hello World!")
 
-// Step 2
 function getComputerChoice() {
-    let a = Math.floor(Math.random() * 3); 
-    if (a === 0){
+    const choices = ["rock","paper","scissors"]
+    let choice = Math.floor(Math.random() * choices.length); 
+    if (choice === 0){
         return "rock";
     }
-    else if (a === 1){
+    else if (choice === 1){
         return "paper";
     }
     else{
@@ -15,80 +13,79 @@ function getComputerChoice() {
     }}
 
 
-// Step 3
-
-function getHumanChoice() {
-    return prompt("Choose rock, paper or scissors: ")
-}
-
-
-// Step 4
-/*humanScore = 0
-computerScore = 0
+function handleClick(e) {
+    const humanChoice = e.target.textContent.toLowerCase()
+    const compChoice = getComputerChoice()
+    playRound(humanChoice,compChoice);}
 
 
-// Step 5
+let humanScore = 0
+let computerScore = 0
 function playRound(humanChoice, computerChoice) {
+    let message = "";
+
+
     if (computerChoice ===  humanChoice){
-        console.log("It's a tie ");}
-    else if (computerChoice === "paper" && humanChoice ==="rock"){
-        console.log("You lose! Paper beats rock")
-        computerScore =  computerScore + 1;}
-    else if (computerChoice === "paper" && humanChoice ==="scissors") {
-        console.log("You win! Scissors beat paper ");
-        humanScore =  humanScore + 1;}
-    else if (computerChoice === "rock" && humanChoice ==="scissors"){
-        console.log("You lose! Rock beats scissors ");
-        computerScore =  computerScore + 1;}
-    else if (computerChoice === "rock" && humanChoice ==="paper"){
-        console.log("You win! Paper beats rock ");
-        humanScore =  humanScore + 1;}
-    else if (computerChoice === "scissors" && humanChoice ==="paper"){
-        console.log("You lose! Scissors beat paper");
-        computerScore =  computerScore + 1;}
-    else if (computerChoice === "scissors" && humanChoice ==="rock"){
-        console.log("You win! Rock beats scissors ");
-        humanScore =  humanScore + 1;}        
+        message = "It's a tie ";
+    } else if (computerChoice === "paper" && humanChoice ==="rock") {
+        message = "You lose! Paper beats rock";
+        computerScore =  computerScore + 1;
+    } else if (computerChoice === "paper" && humanChoice ==="scissors") {
+        message = "You win! Scissors beat paper ";
+        humanScore =  humanScore + 1;
+    } else if (computerChoice === "rock" && humanChoice ==="scissors") {
+        message = "You lose! Rock beats scissors ";
+        computerScore =  computerScore + 1;
+    } else if (computerChoice === "rock" && humanChoice ==="paper") {
+        message = "You win! Paper beats rock ";
+        humanScore =  humanScore + 1;
+    } else if (computerChoice === "scissors" && humanChoice ==="paper"){
+        message = "You lose! Scissors beat paper";
+        computerScore =  computerScore + 1;
+    } else if (computerChoice === "scissors" && humanChoice ==="rock"){
+        message = "You win! Rock beats scissors ";
+        humanScore =  humanScore + 1;
+    } 
+    if (humanScore ===5) {
+        message = "You won the game!";
+        rock.removeEventListener("click", handleClick);
+        scissors.removeEventListener("click", handleClick);
+        paper.removeEventListener("click", handleClick);
+    } else if (computerScore === 5) {
+        message = "Computer won the game!";
+        rock.removeEventListener("click", handleClick);
+        scissors.removeEventListener("click", handleClick);
+        paper.removeEventListener("click", handleClick);
     }
-const humanSelection = getHumanChoice();
-const computerSelection = getComputerChoice();
 
-playRound(humanSelection, computerSelection); */
 
-// Step 6 
-
-function playGame () {
-        function playRound(humanChoice, computerChoice) {
-            if (computerChoice === "paper" && humanChoice ==="rock"){
-                console.log("You lose! Paper beats rock")
-                computerScore =  computerScore + 1;}
-            else if (computerChoice === "paper" && humanChoice ==="scissors") {
-                console.log("You win! Scissors beat paper ");
-                humanScore =  humanScore + 1;}
-            else if (computerChoice === "rock" && humanChoice ==="scissors"){
-                console.log("You lose! Rock beats scissors ");
-                computerScore =  computerScore + 1;}
-            else if (computerChoice === "rock" && humanChoice ==="paper"){
-                console.log("You win! Paper beats rock ");
-                humanScore =  humanScore + 1;}
-            else if (computerChoice === "scissors" && humanChoice ==="paper"){
-                console.log("You lose! Scissors beat paper");
-                computerScore =  computerScore + 1;}
-            else if (computerChoice === "scissors" && humanChoice ==="rock"){
-                console.log("You win! Rock beats scissors ");
-                humanScore =  humanScore + 1;}
-            else if (computerChoice ===  humanChoice){
-                console.log("It's a tie ")}
-                
-            }
-        humanScore = 0
-        computerScore = 0
-        for (i = 0;  i <= 5; i++) {
-        const humanSelection = getHumanChoice();
-        const computerSelection = getComputerChoice();
-        playRound(humanSelection, computerSelection)
+    results.textContent = `${message} 
+    Score - Human: ${humanScore}, Computer: ${computerScore}.`
     }
-       return `Final Score: Human ${humanScore} - Computer ${computerScore}`
-}
-console.log(playGame());
+
+
+
+const scissors = document.createElement("button")
+scissors.textContent= "Scissors"
+
+const paper = document.createElement("button")
+paper.textContent= "Paper"
+
+const rock = document.createElement("button")
+rock.textContent= "Rock"
+
+
+scissors.addEventListener("click", handleClick); 
+paper.addEventListener("click", handleClick) ;
+rock.addEventListener("click", handleClick);
+
+
+
+document.body.appendChild(scissors)
+document.body.appendChild(rock)
+document.body.appendChild(paper)
+
+
+const results = document.createElement("div")
+document.body.appendChild(results)
 
